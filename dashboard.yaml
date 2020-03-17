@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /kubernetes-dashboard
+        backend:
+          serviceName: kubernetes-dashboard
+          servicePort: 80

@@ -1,0 +1,6 @@
+ingress:
+  hostname: gitea
+
+service:
+  http:
+    port: 3000

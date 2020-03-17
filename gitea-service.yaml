@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: gitea
+  namespace: drone
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3000
+  selector:
+    app: gitea-gitea
+  type: ClusterIP

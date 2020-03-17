@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: drone
+  namespace: drone
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - host: drone
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: drone
+          servicePort: 80
