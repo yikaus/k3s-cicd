@@ -129,6 +129,8 @@ login via oauth gitea , assume you have login gitea
 
 
 **install drone runner before you run any job**
+
+view [dronerunner.yaml](./dronerunner.yaml)
 ```
 
 helm install --namespace drone drone-runner-kube drone/drone-runner-kube -f dronerunner.yaml
