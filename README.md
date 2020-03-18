@@ -27,12 +27,10 @@ Before I walk through steps in [INSTALL.md](./INSTALL.md), let 's understand it.
 
 * Internal connection between drone and gitea (for oauth purpose) is through kubernetes service.
 
-* We need to use consistent name for both ingress and kubernetes service , as the server name configured for gitea and drone will be mixed used by webhook,oauth and external access
+* We need to use consistent dns name for both ingress and kubernetes service , as the server name configured for gitea and drone will be mixed used by webhook,oauth and external access. I choose **gitea** & **drone** in this demo
 
 **About the charts**
 
 I use official chart for drone and k8s-land chart(3rd party) I found in github for gitea, however to get all work in k3s I have to create additional ingress as well as service to get above requirement meet.
 
-
-
-### [Install steps](./INSTALL.md)
+### [Install steps here](./INSTALL.md)
