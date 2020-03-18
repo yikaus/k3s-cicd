@@ -5,9 +5,9 @@
 * Linux machine
 
 * Not Mac, why ?
- *  **Cause docker on Mac is not directly run on mac but through [xhyve](https://github.com/machyve/xhyve)**
- * docker network is not exposed on local box
- * However it is possible to tweak k3d arguments to get this works, to be resolved
+  *  **Cause docker on Mac is not directly run on mac but through [xhyve](https://github.com/machyve/xhyve)**
+  * docker network is not exposed on local box
+  * However it is possible to tweak k3d arguments to get this works, to be resolved
 
 
 Help youself install docker,k3d,helm3 and kubectl
@@ -222,7 +222,7 @@ drone build | <img src="./drone.png" width="900">
 * `kubectl describe svc` & `kubectl describe endpoint`
 
 * logon to the k3s instance (docker)
-** `docker exec -ti k3d-cicd-server /bin/sh` ``docker exec -ti k3d-cicd-worker-0 /bin/sh
-** remeber k3s is not using docker but containerd. `crictl` is your friends.
+  * `docker exec -ti k3d-cicd-server /bin/sh` and ` docker exec -ti k3d-cicd-worker-0 /bin/sh`
+  * remeber k3s is not using docker but containerd. `crictl` is your friends.
 
 more to add
