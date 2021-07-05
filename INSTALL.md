@@ -16,34 +16,40 @@ Help youself install docker,k3d,helm3 and kubectl
 #My installation
 docker --version && kubectl version --short && helm version --short && k3d version
 
-Docker version 19.03.8, build afacb8b7f0
+Docker version 20.10.7, build f0df350
 Client Version: v1.17.3
-Server Version: v1.17.2+k3s1
+Server Version: v1.21.1+k3s1
 v3.1.1+gafe7058
-k3d version v1.6.0
-k3s version v1.17.2-k3s1
+k3d version v4.4.6
+k3s version v1.21.1-k3s1 (default)
 ```
 
 
 ### start k3s cluster
 
 ```
-k3d create --name cicd -p 9000:80 --workers 2
+k3d cluster create cicd -a 2  -p 9000:80@loadbalancer
 
-export KUBECONFIG="$(k3d get-kubeconfig --name='cicd')"
+export KUBECONFIG="$(k3d kubeconfig write cicd)"
 
-k3d list
-+-------+------------------------------------+---------+---------+
-| NAME  |               IMAGE                | STATUS  | WORKERS |
-+-------+------------------------------------+---------+---------+
-| cicd  | docker.io/rancher/k3s:v1.17.2-k3s1 | running |   2/2   |
-+-------+------------------------------------+---------+---------+
+
+k3d cluster ls
+NAME   SERVERS   AGENTS   LOADBALANCER
+cicd   1/1       2/2      true
+
+k3d node ls 
+NAME                ROLE           CLUSTER   STATUS
+k3d-cicd-agent-0    agent          cicd      running
+k3d-cicd-agent-1    agent          cicd      running
+k3d-cicd-server-0   server         cicd      running
+k3d-cicd-serverlb   loadbalancer   cicd      running
 
 docker ps --format "{{.Names}}\t{{.Status}}\t{{.Ports}}"
 
-k3d-cicd-worker-1	Up 3 hours
-k3d-cicd-worker-0	Up 3 hours
-k3d-cicd-server	Up 3 hours	0.0.0.0:6443->6443/tcp, 0.0.0.0:9000->80/tcp
+k3d-cicd-serverlb	Up 3 minutes	0.0.0.0:9000->80/tcp, :::9000->80/tcp, 0.0.0.0:44561->6443/tcp
+k3d-cicd-agent-1	Up 4 minutes	
+k3d-cicd-agent-0	Up 4 minutes	
+k3d-cicd-server-0	Up 4 minutes
 
 
 ```
@@ -53,7 +59,7 @@ k3d-cicd-server	Up 3 hours	0.0.0.0:6443->6443/tcp, 0.0.0.0:9000->80/tcp
 
 As for local demo or understanding I choose install non-ssl dashboard by
 
-`kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/alternative.yaml`
+`kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.3.1/aio/deploy/alternative.yaml`
 
 Choose to create path based ingress rather than use kubectl proxy , view [dashboard.yaml](./dashboard.yaml) [dashboardrole.yaml](./dashboardrole.yaml)
 

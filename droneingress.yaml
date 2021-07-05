@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: drone
@@ -11,6 +11,9 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: drone
-          servicePort: 80
+          service:
+            name: drone
+            port: 
+              number: 80
