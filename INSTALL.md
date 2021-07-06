@@ -70,7 +70,7 @@ Choose to create path based ingress rather than use kubectl proxy , view [dashbo
 
 Access dashboard with token of deafult user (don't miss the `/` in the end of URL) , here I assign cluster permission to default user
 
-http://localhost:9000/kubernetes-dashboard/
+http://localhost:9000/
 
 get token by
 
