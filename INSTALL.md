@@ -105,8 +105,8 @@ kubectl apply -f gitea-service.yaml
 add traefik cluster ip to /etc/hosts to resolve gitea and drone
 
 ```
-echo "$(k get svc traefik -n kube-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}')\tgitea" | sudo tee -a /etc/hosts
-echo "$(k get svc traefik -n kube-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}')\tdrone" | sudo tee -a /etc/hosts
+echo "$(kubectl get ingresses.extensions -n drone -o jsonpath='{.items[0].status.loadBalancer.ingress[0].ip}' 2> /dev/null)\tgitea" | sudo tee -a /etc/hosts
+echo "$(kubectl get ingresses.extensions -n drone -o jsonpath='{.items[0].status.loadBalancer.ingress[0].ip}' 2> /dev/null)\tdrone" | sudo tee -a /etc/hosts
 ```
 
 access http://gitea
